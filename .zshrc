@@ -1,3 +1,4 @@
+# Sofiane's zshrc file
 export ZSH="/home/sofiane/.config/zsh"
 ZSH_THEME="avit"
 plugins=(git)
