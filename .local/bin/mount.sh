@@ -1,4 +1,5 @@
 #!/bin/bash
+# Rofi USB mounting script
 
 all="$(lsblk -rpo "label,name,type,size,mountpoint" | grep -v 'mmcblk1' | awk '$3=="part"{if($5==""){printf "%s: %s (%s)\n",$1,$2,$4}else{printf "%s: %s (%s, mounted)\n",$1,$2,$4}}')"
 
