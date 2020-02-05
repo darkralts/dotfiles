@@ -1,3 +1,4 @@
+# Script for adjusting the brightness and color temperature of displays on a software level using xrandr. 
 #!/usr/bin/env bash
 set -e
 
