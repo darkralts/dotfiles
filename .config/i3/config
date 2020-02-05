@@ -1,0 +1,124 @@
+# This config file will use environmental variables such as $BROWSER and $TERMINAL.
+# You can set these variables in ~/.profile or ~/.bash_profile if you have it as below:
+#
+# export FILE="ranger"
+# export TERMINAL="st"
+
+# #---Basic Definitions---# #
+for_window [class="^.*"] border pixel 2
+gaps inner 15
+gaps outer 15
+set $term --no-startup-id $TERMINAL
+set $mod Mod4
+set $shutdown sudo -A shutdown -h now
+set $reboot sudo -A reboot
+set $netrefresh --no-startup-id sudo -A systemctl restart NetworkManager
+set $hibernate sudo -A systemctl suspend
+
+
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+exec_always --no-startup-id $HOME/.config/polybar/scripts/spotify/py_spotify_listener.py
+exec_always --no-startup-id exec nm-applet
+exec_always --no-startup-id exec wal --theme tempus_dusk
+
+# #---Basic Bindings---# #
+bindsym $mod+Return 		exec $term
+bindsym $mod+Shift+space 	floating toggle
+bindsym $mod+Shift+b border normal
+bindsym $mod+Shift+Ctrl+b border pixel 2
+# #---Letter Key Bindings---# #
+bindsym $mod+q			[con_id="__focused__" instance="^(?!dropdown_).*$"] kill
+bindsym $mod+Shift+q		[con_id="__focused__" instance="^(?!dropdown_).*$"] exec --no-startup-id kill -9 `xdotool getwindowfocus getwindowpid`
+bindsym $mod+Shift+w		exec --no-startup-id $BROWSER
+bindsym $mod+t			split toggle
+bindsym $mod+Shift+y		exec --no-startup-id i3resize left
+bindsym $mod+Shift+u		exec --no-startup-id i3resize down
+bindsym $mod+Shift+i		exec --no-startup-id i3resize up
+bindsym $mod+Shift+o		exec --no-startup-id i3resize right
+bindsym $mod+s			gaps inner current plus 5
+bindsym $mod+Shift+s		gaps inner current minus 5
+bindsym $mod+d			exec --no-startup-id rofi.sh
+bindsym $mod+f			fullscreen toggle
+bindsym $mod+n			exec $term -e newsboat 
+bindsym $mod+w			exec firefox
+
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+# switch to workspace
+bindsym $mod+1		workspace $ws1
+bindsym $mod+2		workspace $ws2
+bindsym $mod+3		workspace $ws3
+bindsym $mod+4		workspace $ws4
+bindsym $mod+5		workspace $ws5
+bindsym $mod+6		workspace $ws6
+bindsym $mod+7		workspace $ws7
+bindsym $mod+8		workspace $ws8
+bindsym $mod+9		workspace $ws9
+bindsym $mod+0		workspace $ws10
+
+# move focused container to workspace
+bindsym $mod+Shift+1	move container to workspace $ws1
+bindsym $mod+Shift+2	move container to workspace $ws2
+bindsym $mod+Shift+3	move container to workspace $ws3
+bindsym $mod+Shift+4	move container to workspace $ws4
+bindsym $mod+Shift+5	move container to workspace $ws5
+bindsym $mod+Shift+6	move container to workspace $ws6
+bindsym $mod+Shift+7	move container to workspace $ws7
+bindsym $mod+Shift+8	move container to workspace $ws8
+bindsym $mod+Shift+9	move container to workspace $ws9
+bindsym $mod+Shift+0	move container to workspace $ws10
+
+# #---Function Buttons---# #
+bindsym $mod+F2		restart
+bindsym $mod+F9		exec --no-startup-id mount.sh
+# #---Arrow Keys---# #
+bindsym $mod+Left		focus left
+bindsym $mod+Shift+Left		move left
+bindsym $mod+Ctrl+Left		move workspace to output left
+bindsym $mod+Down		focus down
+bindsym $mod+Shift+Down		move down
+bindsym $mod+Ctrl+Down		move workspace to output down
+bindsym $mod+Up			focus up
+bindsym $mod+Shift+Up		move up
+bindsym $mod+Ctrl+Up		move workspace to output up
+bindsym $mod+Right 		focus right
+bindsym $mod+Shift+Right 	move right
+bindsym $mod+Ctrl+Right		move workspace to output right
+bindsym $mod+l exec i3lock-fancy
+
+# Pulse Audio controls
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 0 +10%
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume 0 -10% 
+bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle
+
+# floating
+for_window [class="Pavucontrol"] floating enable
+for_window [class="Thunar"] floating enable
+for_window [class="Termite"] floating enable
+
+# Sys
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioPause exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+bindsym Print exec gnome-screenshot -i
+bindsym XF86MonBrightnessUp exec brightness + eDP-1 0.2
+bindsym XF86MonBrightnessDown exec brightness - eDP-1 0.2
+
+# Bindings for Apps 
+for_window [class="Spotify"] move to workspace $ws10
+for_window [class="mpv"] floating enable; move to workspace $ws7
+for_window [class="code"] move to workspace $ws3
+for_window [class="TelegramDesktop"] move to workspace $ws4
+for_window [class="discord"] move to workspace $ws4
+for_window [title="Twitter" class="firefox"] floating enable; resize set 500 755; move absolute position center
+for_window [title="Butter" class="Chromium-browser"] move to workspace $ws7

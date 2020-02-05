@@ -1,0 +1,14 @@
+#!/usr/bin/env sh
+
+# This file runs when a DM logs you into a graphical session.
+# If you use startx/xinit like a Chad, this file will also be sourced.
+
+setbg &
+sxhkd -m 1 &
+ulauncher &
+nm-applet &
+redshift &
+xfce4-notes &
+xfce4-clipman &
+setxkbmap fr 
+compton & 

@@ -1,0 +1,19 @@
+[Default Applications]
+x-scheme-handler/magnet=torrent.desktop;
+application/x-bittorrent=torrent.desktop;
+x-scheme-handler/mailto=mail.desktop;
+text/plain=text.desktop;
+text/x-shellscript=text.desktop;
+application/postscript=pdf.desktop;
+application/pdf=pdf.desktop;
+image/png=img.desktop;
+image/jpeg=img.desktop;
+image/gif=img.desktop;
+application/rss+xml=rss.desktop
+
+[Added Associations]
+text/plain=code-oss.desktop;userapp-"gedit"-WV1KE0.desktop;org.gnome.gedit.desktop;
+application/x-shellscript=userapp-"gedit"-WV1KE0.desktop;
+application/json=leafpad.desktop;userapp-"gedit"-WV1KE0.desktop;
+application/octet-stream=userapp-"gedit"-WV1KE0.desktop;
+application/xml=userapp-"gedit"-WV1KE0.desktop;
